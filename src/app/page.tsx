@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className="flex flex-col h-screen">
       {/* Header - thin section at the top */}
-      <div className="h-16 bg-gray-800 text-white flex items-center justify-between px-6 border-2 border-gray-300">
+      <div className="h-16 bg-gray-800 text-white flex items-center justify-between px-2 border-2 border-gray-300">
         <div className="flex items-center space-x-4">
           <button 
             onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -18,14 +18,11 @@ export default function Home() {
           <h1 className="text-xl font-bold">Abyssinia Music</h1>
         </div>
         <div className="flex space-x-4">
-          <button className="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700">
-            Home
+          <button className="w-[92px] px-4 py-2 bg-gray-600 hover:bg-red-900">
+            Sign Up
           </button>
-          <button className="px-4 py-2 bg-green-600 rounded hover:bg-green-700">
-            Music
-          </button>
-          <button className="px-4 py-2 bg-purple-600 rounded hover:bg-purple-700">
-            About
+          <button className="w-[92px] px-4 py-2 bg-gray-600 hover:bg-red-900 border-black">
+            Login
           </button>
         </div>
       </div>
