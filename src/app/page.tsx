@@ -85,42 +85,43 @@ export default function Home() {
 
         {/* Main content - takes up the rest of the screen */}
         <div className="flex-1 bg-gray-100 flex flex-col items-center justify-center border-2 border-blue-500">
-          {/* Music Player Section */}
-          <div className="bg-white p-8 rounded-lg shadow-lg mb-8 max-w-md w-full">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">
-              Music Player
-            </h2>
-            
+          {/* Simple Music Player */}
+          <div className="w-full max-w-2xl px-8">
             {/* Current Track Display */}
-            <div className="bg-gray-100 p-4 rounded mb-4">
-              <p className="text-sm text-gray-600 mb-1">Now Playing:</p>
-              <p className="font-semibold text-gray-800">{currentTrack}</p>
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">
+                {currentTrack}
+              </h2>
+              <p className="text-gray-600">
+                {isPlaying ? 'Now Playing' : 'Paused'}
+              </p>
             </div>
 
-            {/* Music Control Buttons */}
-            <div className="flex justify-center space-x-4 mb-4">
-              <button 
-                onClick={handlePlayPause}
-                className={`px-6 py-3 rounded-lg font-bold ${
-                  isPlaying 
-                    ? 'bg-red-600 hover:bg-red-700 text-white' 
-                    : 'bg-green-600 hover:bg-green-700 text-white'
-                }`}
-              >
-                {isPlaying ? '⏸️ Pause' : '▶️ Play'}
-              </button>
+            {/* Progress Line */}
+            <div className="relative mb-8">
+              {/* Background Line */}
+              <div className={`w-full h-1 rounded-full transition-colors duration-300 ${
+                isPlaying ? 'bg-blue-500' : 'bg-gray-400'
+              }`}></div>
               
-              <button 
-                onClick={handleStop}
-                className="px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-bold"
-              >
-                ⏹️ Stop
-              </button>
-            </div>
-
-            {/* Progress Bar */}
-            <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
-              <div className="bg-blue-600 h-2 rounded-full" style={{ width: isPlaying ? '45%' : '0%' }}></div>
+              {/* Progress Fill */}
+              <div className={`absolute top-0 left-0 h-1 rounded-full transition-all duration-300 ${
+                isPlaying ? 'bg-green-500' : 'bg-gray-300'
+              }`} style={{ width: isPlaying ? '45%' : '0%' }}></div>
+              
+              {/* Control Button in Center */}
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <button 
+                  onClick={handlePlayPause}
+                  className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-bold shadow-lg transition-all duration-300 ${
+                    isPlaying 
+                      ? 'bg-red-500 hover:bg-red-600' 
+                      : 'bg-green-500 hover:bg-green-600'
+                  }`}
+                >
+                  {isPlaying ? '⏸️' : '▶️'}
+                </button>
+              </div>
             </div>
 
             {/* Time Display */}
@@ -131,7 +132,7 @@ export default function Home() {
           </div>
 
           {/* Welcome Message */}
-          <div className="text-center">
+          <div className="text-center mt-8">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">
               Welcome to Abyssinia Music
             </h2>
