@@ -3,6 +3,16 @@ import { useState } from 'react'
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [currentTrack, setCurrentTrack] = useState('Ethiopian Jazz - Mulatu Astatke')
+
+  const handlePlayPause = () => {
+    setIsPlaying(!isPlaying)
+  }
+
+  const handleStop = () => {
+    setIsPlaying(false)
+  }
 
   return (
     <div className="flex flex-col h-screen">
@@ -17,6 +27,20 @@ export default function Home() {
           </button>
           <h1 className="text-xl font-bold">Abyssinia Music</h1>
         </div>
+        
+        {/* Navigation Buttons */}
+        <div className="flex space-x-2">
+          <button className="px-3 py-2 bg-blue-600 rounded hover:bg-blue-700 text-sm">
+            Home
+          </button>
+          <button className="px-3 py-2 bg-green-600 rounded hover:bg-green-700 text-sm">
+            Music
+          </button>
+          <button className="px-3 py-2 bg-purple-600 rounded hover:bg-purple-700 text-sm">
+            About
+          </button>
+        </div>
+
         <div className="flex space-x-4">
           <button className="w-[92px] px-4 py-2 bg-gray-600 hover:bg-red-900">
             Sign Up
@@ -60,13 +84,59 @@ export default function Home() {
         </div>
 
         {/* Main content - takes up the rest of the screen */}
-        <div className="flex-1 bg-gray-100 flex items-center justify-center border-2 border-blue-500">
+        <div className="flex-1 bg-gray-100 flex flex-col items-center justify-center border-2 border-blue-500">
+          {/* Music Player Section */}
+          <div className="bg-white p-8 rounded-lg shadow-lg mb-8 max-w-md w-full">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">
+              Music Player
+            </h2>
+            
+            {/* Current Track Display */}
+            <div className="bg-gray-100 p-4 rounded mb-4">
+              <p className="text-sm text-gray-600 mb-1">Now Playing:</p>
+              <p className="font-semibold text-gray-800">{currentTrack}</p>
+            </div>
+
+            {/* Music Control Buttons */}
+            <div className="flex justify-center space-x-4 mb-4">
+              <button 
+                onClick={handlePlayPause}
+                className={`px-6 py-3 rounded-lg font-bold ${
+                  isPlaying 
+                    ? 'bg-red-600 hover:bg-red-700 text-white' 
+                    : 'bg-green-600 hover:bg-green-700 text-white'
+                }`}
+              >
+                {isPlaying ? '⏸️ Pause' : '▶️ Play'}
+              </button>
+              
+              <button 
+                onClick={handleStop}
+                className="px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-bold"
+              >
+                ⏹️ Stop
+              </button>
+            </div>
+
+            {/* Progress Bar */}
+            <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
+              <div className="bg-blue-600 h-2 rounded-full" style={{ width: isPlaying ? '45%' : '0%' }}></div>
+            </div>
+
+            {/* Time Display */}
+            <div className="flex justify-between text-sm text-gray-600">
+              <span>1:23</span>
+              <span>3:45</span>
+            </div>
+          </div>
+
+          {/* Welcome Message */}
           <div className="text-center">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">
               Welcome to Abyssinia Music
             </h2>
             <p className="text-lg text-gray-600">
-              Music
+              Your gateway to Ethiopian music and culture
             </p>
           </div>
         </div>
